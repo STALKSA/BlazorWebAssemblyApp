@@ -2,41 +2,18 @@
 @inject ICatalog Catalog
 @inject NavigationManager NavigationManager
 
-<head>
-    <link href="/css/catalog.css" rel="stylesheet" />
-</head>
+<MudText Typo="Typo.h4" Align="Align.Center" Class="ma-20">Каталог товаров</MudText>
+<MudGrid Spacing="2" Justify="Justify.Center">
+	@foreach (var product in products)
+	{
+	<MudItem>
+		<MudCard Class="mud-info">
+			<ProductItem Product="product" />
+			<MudCardActions>
+					<MudButton Variant="Variant.Text" OnClick="() => NavigateToProductPage(product.Id)">Карточка товара</MudButton>
+			</MudCardActions>
+		</MudCard>
+	</MudItem>
+	}
+</MudGrid>
 
-<div>
-<table class="custom-table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Название товара</th>
-            <th>Цена в рублях</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var product in products)
-{
-            <tr>
-                <td>@product.Id</td>
-                <td><a @onclick="(() => NavigateToProductPage(product.Id))">@product.Name</a></td>
-                <td>@product.Price</td>
-            </tr>
-}
-    </tbody>
-</table>
-</div>
-
-@code {
-    private List<Product>? products;
-
-    protected override async Task OnInitializedAsync()
-    {
-        products = await Catalog.GetProductsAsync();
-    }
-    private void NavigateToProductPage(Guid productId)
-    {
-        NavigationManager.NavigateTo($"/products/{productId}");
-    }
-}

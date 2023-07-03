@@ -1,6 +1,6 @@
 ﻿using BlazorBookShop.Models;
 
-namespace BlazorBookShop
+namespace BlazorBookShop.Interfaces
 {
     public interface ICatalog
     {
