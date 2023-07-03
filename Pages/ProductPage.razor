@@ -4,6 +4,14 @@
 
 <h3>@_product.Name</h3>
 
+<div>@Product.Description</div>
+<div>Цена: @Product.Price</div>
+<div>Дата производства: @Product.ProducedAt</div>
+<div>Срок годности: @Product.ExpiredAt</div>
+<div>Наличие на складе: @Product.Stock</div>
+
+<button @onclick="AddToCart">Добавить в корзину</button>
+
 <div>@_product.ToString()</div>
 
 @code {
@@ -19,5 +27,9 @@
     private void NavigateToProductPage(Guid productId)
     {
         NavigationManager.NavigateTo($"/products/{productId}");
+    }
+    private void AddToCart()
+    {
+        
     }
 }
