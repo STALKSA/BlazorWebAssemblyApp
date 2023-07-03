@@ -1,5 +1,6 @@
 ﻿@page "/products/{ProductId:guid}"
 @inject ICatalog Catalog
+@inject NavigationManager NavigationManager
 
 <h3>@_product.Name</h3>
 
@@ -14,5 +15,9 @@
     {
         await base.OnInitializedAsync();
         _product = await Catalog.GetProductByIdAsync(ProductId);
+    }
+    private void NavigateToProductPage(Guid productId)
+    {
+        NavigationManager.NavigateTo($"/products/{productId}");
     }
 }
