@@ -1,5 +1,6 @@
 ﻿@page "/catalog"
 @inject ICatalog Catalog
+@inject NavigationManager NavigationManager
 
 <head>
     <link href="/css/catalog.css" rel="stylesheet" />
@@ -34,5 +35,9 @@
     protected override async Task OnInitializedAsync()
     {
         products = await Catalog.GetProductsAsync();
+    }
+    private void NavigateToProductPage(Guid productId)
+    {
+        NavigationManager.NavigateTo($"/products/{productId}");
     }
 }
