@@ -6,7 +6,6 @@
     <link href="/css/catalog.css" rel="stylesheet" />
 </head>
 
-@*<h3>Каталог нашего магазина</h3>*@
 <div>
 <table class="custom-table">
     <thead>
@@ -21,7 +20,7 @@
 {
             <tr>
                 <td>@product.Id</td>
-                <td>@product.Name</td>
+                <td><a @onclick="(() => NavigateToProductPage(product.Id))">@product.Name</a></td>
                 <td>@product.Price</td>
             </tr>
 }
