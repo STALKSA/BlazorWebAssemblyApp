@@ -14,7 +14,6 @@
                 throw new ArgumentException($" {nameof(price)} не может быть меньше или равно 0");
             }
 
-            //Id = Guid.NewGuid();
             Name = name;
             Price = price;
         }
