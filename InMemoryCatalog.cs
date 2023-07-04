@@ -112,30 +112,31 @@ namespace BlazorBookShop
             {
                 var name = productImages[i].name;
                 var price = random.Next(50, 2000);
-				var stock = Math.Round(random.NextDouble() * 100);
+		var stock = Math.Round(random.NextDouble() * 100);
 
-				var product = new Product(name, price);
-				product.Id = i == 0 ? Guid.Empty : Guid.NewGuid();
-				product.Img = productImages[i].img;
-				product.Description = name;
-				product.Stock = stock;
-				products.TryAdd(product.Id, product);
-			}
+		var product = new Product(name, price);
+		product.Id = i == 0 ? Guid.Empty : Guid.NewGuid();
+		product.Img = productImages[i].img;
+		product.Description = name;
+		product.Stock = stock;
+		products.TryAdd(product.Id, product);
+	    }
 
             return products;
         }
 
     }
 
-	struct ProductsImages
-	{
-		public string name;
-		public string img;
-		public ProductsImages(string name, string img)
-		{
-			this.name = name;
-			this.img = img;
-		}
-	};
+     struct ProductsImages
+     {
+	public string name;
+	public string img;
+	public ProductsImages(string name, string img)
+	 {
+		this.name = name;
+		this.img = img;
+	 }
+	     
+       };
 }
 
