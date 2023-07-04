@@ -28,10 +28,7 @@
         await base.OnInitializedAsync();
         _product = await Catalog.GetProductByIdAsync(ProductId);
     }
-    private void NavigateToProductPage(Guid productId)
-    {
-        NavigationManager.NavigateTo($"/products/{productId}");
-    }
+
     private string fullImgName = "/img/";
 
     public string getImgName()
