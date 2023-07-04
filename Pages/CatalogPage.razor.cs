@@ -11,9 +11,9 @@ namespace BlazorBookShop.Pages
         {
             products = await Catalog.GetProductsAsync();
         }
-        private void NavigateToProductPage(Guid productId)
-		{
+        void NavigateToProductPage(Guid productId)
+	{
             NavigationManager.NavigateTo($"/products/{productId.ToString()}");
-		}
+	}
     }
 }
