@@ -3,7 +3,7 @@ using BlazorBookShop.Models;
 using System;
 using System.Collections.Concurrent;
 
-namespace BlazorBookShop
+namespace BlazorBookShop.Services
 {
     public class InMemoryCatalog : ICatalog
     {
@@ -79,20 +79,20 @@ namespace BlazorBookShop
             var products = new ConcurrentDictionary<Guid, Product>();
 
             var productImages = new ProductsImages[]
-			{
-				new ProductsImages("Паттерны проектирования", "book1.jpg"),
-				new ProductsImages("Чистый код", "book2.jpg"),
-				new ProductsImages("Совершенный код. Мастер-класс", "book3.jpg"),
-				new ProductsImages("Алгоритмы: построение и анализ", "book4.jpeg"),
-				new ProductsImages("Фундаментальные основы хакерства", "book5.jpg"),
-				new ProductsImages("Человеческий фактор: успешные проекты и команды", "book6.jpg"),
-				new ProductsImages("Грокаем алгоритмы. Иллюстрированное пособие для программистов и любопытствующих", "book7.jpeg"),
-				new ProductsImages("Программист-фанатик", "book8.jpg"),
-				new ProductsImages("Карьера программиста", "book9.jpeg"),
-				new ProductsImages("Рефакторинг: улучшение дизайна существующего кода", "book10.jpg"),
-			};
+            {
+                new ProductsImages("Паттерны проектирования", "book1.jpg"),
+                new ProductsImages("Чистый код", "book2.jpg"),
+                new ProductsImages("Совершенный код. Мастер-класс", "book3.jpg"),
+                new ProductsImages("Алгоритмы: построение и анализ", "book4.jpeg"),
+                new ProductsImages("Фундаментальные основы хакерства", "book5.jpg"),
+                new ProductsImages("Человеческий фактор: успешные проекты и команды", "book6.jpg"),
+                new ProductsImages("Грокаем алгоритмы. Иллюстрированное пособие для программистов и любопытствующих", "book7.jpeg"),
+                new ProductsImages("Программист-фанатик", "book8.jpg"),
+                new ProductsImages("Карьера программиста", "book9.jpeg"),
+                new ProductsImages("Рефакторинг: улучшение дизайна существующего кода", "book10.jpg"),
+            };
 
-			var productNames = new string[]
+            var productNames = new string[]
             {
             "Паттерны проектирования",
             "Чистый код",
@@ -112,31 +112,31 @@ namespace BlazorBookShop
             {
                 var name = productImages[i].name;
                 var price = random.Next(50, 2000);
-		var stock = Math.Round(random.NextDouble() * 100);
+                var stock = Math.Round(random.NextDouble() * 100);
 
-		var product = new Product(name, price);
-		product.Id = i == 0 ? Guid.Empty : Guid.NewGuid();
-		product.Img = productImages[i].img;
-		product.Description = name;
-		product.Stock = stock;
-		products.TryAdd(product.Id, product);
-	    }
+                var product = new Product(name, price);
+                product.Id = i == 0 ? Guid.Empty : Guid.NewGuid();
+                product.Img = productImages[i].img;
+                product.Description = name;
+                product.Stock = stock;
+                products.TryAdd(product.Id, product);
+            }
 
             return products;
         }
 
     }
 
-     struct ProductsImages
-     {
-	public string name;
-	public string img;
-	public ProductsImages(string name, string img)
-	 {
-		this.name = name;
-		this.img = img;
-	 }
-	     
-       };
+    struct ProductsImages
+    {
+        public string name;
+        public string img;
+        public ProductsImages(string name, string img)
+        {
+            this.name = name;
+            this.img = img;
+        }
+
+    };
 }
 

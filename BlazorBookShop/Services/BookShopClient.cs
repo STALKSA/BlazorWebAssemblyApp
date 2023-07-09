@@ -1,7 +1,8 @@
-﻿using BlazorBookShop.Models;
+﻿using BlazorBookShop.Interfaces;
+using BlazorBookShop.Models;
 using System.Net.Http.Json;
 
-namespace BlazorBookShop
+namespace BlazorBookShop.Services
 {
     public class BookShopClient : IDisposable, IBookShopClient
     {
@@ -10,7 +11,7 @@ namespace BlazorBookShop
 
         public BookShopClient(string host = "https://bookshop.com/", HttpClient? httpClient = null)
         {
-            ArgumentException.ThrowIfNullOrEmpty(host);
+            
             if (!Uri.TryCreate(host, UriKind.Absolute, out var hostUri))
             {
                 throw new ArgumentException("Адрес хоста должен быть валидного значения", nameof(host));
@@ -27,6 +28,16 @@ namespace BlazorBookShop
         public void Dispose()
         {
             ((IDisposable)_httpClient).Dispose();
+        }
+
+        public async Task<Product[]> GetProductsAsync()
+        {
+            var products = await _httpClient.GetFromJsonAsync<Product[]>($"get_products");
+            if (products is null)
+            {
+                throw new InvalidOperationException("Сервер вернул продукт со значением null");
+            }
+            return products;
         }
 
         public async Task<Product> GetProduct(Guid id)
@@ -46,5 +57,20 @@ namespace BlazorBookShop
             using var response = await _httpClient.PostAsJsonAsync("add_product", product);
             response.EnsureSuccessStatusCode();
         }
+
+        public async Task UpdateProduct(Guid id, Product product)
+        {
+            ArgumentNullException.ThrowIfNull(id);
+            var response = await _httpClient.PostAsJsonAsync($"update_product?id={id}", product);
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task DeleteProduct(Guid id)
+        {
+            ArgumentNullException.ThrowIfNull(id);
+            var response = await _httpClient.PostAsync($"delete_product?id={id}", null);
+            response.EnsureSuccessStatusCode();
+        }
+
     }
 }

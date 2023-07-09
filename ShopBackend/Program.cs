@@ -17,7 +17,18 @@ builder.Services.AddDbContext<AppDbContext>(
 
 builder.Services.AddHttpClient();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
+
+app.UseCors(policy =>
+{
+	policy
+		.AllowAnyMethod()
+		.AllowAnyHeader()
+		.AllowAnyOrigin();
+});
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

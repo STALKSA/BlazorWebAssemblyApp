@@ -1,19 +1,23 @@
-﻿using BlazorBookShop.Models;
-using System;
+﻿using BlazorBookShop.Interfaces;
+using BlazorBookShop.Models;
+
+
 
 namespace BlazorBookShop.Pages
 {
-    public partial class CatalogPage
+	public partial class CatalogPage
     {
-        private List<Product>? products;
+        private Product[] products;
 
-        protected override async Task OnInitializedAsync()
-        {
-            products = await Catalog.GetProductsAsync();
-        }
-        void NavigateToProductPage(Guid productId)
-	{
-            NavigationManager.NavigateTo($"/products/{productId.ToString()}");
-	}
+		protected override async Task OnInitializedAsync()
+		{
+			products = await BookShopClient.GetProductsAsync();
+			StateHasChanged();
+		}
+		void NavigateToProductPage(Guid id)
+	    {
+            NavigationManager.NavigateTo($"/products/{id.ToString()}");
+	    }
+
     }
 }
