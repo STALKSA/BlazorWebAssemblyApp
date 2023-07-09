@@ -20,9 +20,5 @@
 	<ItemGroup>
 	  <Folder Include="wwwroot\img\" />
 	</ItemGroup>
-	
-	<ItemGroup>
-	  <ProjectReference Include="..\ShopBackend\ShopBackend.csproj" />
-	</ItemGroup>
 
 </Project>
